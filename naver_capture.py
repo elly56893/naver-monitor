@@ -783,9 +783,7 @@ def write_ad_analysis_tab(sheets, all_ads):
         ads = all_ads.get(kw, {}).get(device, [])
         my_rank    = next((str(a['rank']) for a in ads if _is_company(a, MY_COMPANY, MY_URL_KEY)), '미노출')
         rival_rank = next((str(a['rank']) for a in ads if _is_company(a, KEY_RIVAL, RIVAL_URL_KEY)), '미노출')
-        # 날짜는 첫 행에만 표시 (병합 효과)
-        date_label = f'📅 {TODAY}' if i == 0 else ''
-        data_rows.append([date_label, kw, device, my_rank, rival_rank])
+        data_rows.append([f'📅 {TODAY}', kw, device, my_rank, rival_rank])
         rank_info.append((next_row_0 + i, my_rank, rival_rank))
 
     # AI 분석 행
