@@ -1,0 +1,6 @@
+playwright
+Pillow
+google-auth
+google-auth-httplib2
+google-api-python-client
+requests
