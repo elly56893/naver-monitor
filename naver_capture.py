@@ -686,14 +686,15 @@ def analyze_ads_with_claude(all_ads):
 
 각 섹션 제목을 명확히 쓰고, 실무에서 바로 활용할 수 있도록 작성해주세요."""
 
-    print('  claude -p 분석 중...')
-    result = subprocess.run(
-        ['claude', '-p', prompt],
-        capture_output=True, text=True, timeout=180
+    print('  Claude API 분석 중...')
+    import anthropic
+    client = anthropic.Anthropic()
+    message = client.messages.create(
+        model='claude-opus-4-6',
+        max_tokens=4096,
+        messages=[{'role': 'user', 'content': prompt}]
     )
-    if result.returncode != 0:
-        raise RuntimeError(f'claude -p 실패:\n{result.stderr}')
-    return result.stdout.strip()
+    return message.content[0].text.strip()
 
 
 def _rank_color(rank_str):
@@ -1268,14 +1269,15 @@ def analyze_content_with_claude(all_content):
 
 각 섹션 제목을 명확히 쓰고 실무에서 바로 활용 가능하게 작성해주세요."""
 
-    print('  claude -p 콘텐츠 분석 중...')
-    result = subprocess.run(
-        ['claude', '-p', prompt],
-        capture_output=True, text=True, timeout=180
+    print('  Claude API 콘텐츠 분석 중...')
+    import anthropic
+    client = anthropic.Anthropic()
+    message = client.messages.create(
+        model='claude-opus-4-6',
+        max_tokens=4096,
+        messages=[{'role': 'user', 'content': prompt}]
     )
-    if result.returncode != 0:
-        raise RuntimeError(f'claude -p 실패:\n{result.stderr}')
-    return result.stdout.strip()
+    return message.content[0].text.strip()
 
 
 def write_content_analysis_tab(sheets, all_content):
